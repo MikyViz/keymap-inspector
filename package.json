@@ -1,0 +1,42 @@
+{
+  "name": "keymap-inspector",
+  "version": "0.1.0",
+  "description": "Inspect keyboard events and characters across different layouts.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "keymap-inspector": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "cli": "npm run build && node dist/cli/index.js",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikyViz/keymap-inspector.git"
+  },
+  "keywords": [
+    "keymap",
+    "keyboard",
+    "layout",
+    "inspector",
+    "i18n"
+  ],
+  "author": "vizenovsky@gmail.com",
+  "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}

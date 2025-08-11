@@ -1,0 +1,108 @@
+import { Keymap } from '../types';
+
+export const ua: Keymap = {
+  // Первый ряд (цифры)
+  '1': { key: '1', code: 'Digit1', keyCode: 49 },
+  '2': { key: '2', code: 'Digit2', keyCode: 50 },
+  '3': { key: '3', code: 'Digit3', keyCode: 51 },
+  '4': { key: '4', code: 'Digit4', keyCode: 52 },
+  '5': { key: '5', code: 'Digit5', keyCode: 53 },
+  '6': { key: '6', code: 'Digit6', keyCode: 54 },
+  '7': { key: '7', code: 'Digit7', keyCode: 55 },
+  '8': { key: '8', code: 'Digit8', keyCode: 56 },
+  '9': { key: '9', code: 'Digit9', keyCode: 57 },
+  '0': { key: '0', code: 'Digit0', keyCode: 48 },
+  '-': { key: '-', code: 'Minus', keyCode: 189 },
+  '=': { key: '=', code: 'Equal', keyCode: 187 },
+
+  // Второй ряд (украинская ЙЦУКЕН)
+  'й': { key: 'й', code: 'KeyQ', keyCode: 81 },
+  'ц': { key: 'ц', code: 'KeyW', keyCode: 87 },
+  'у': { key: 'у', code: 'KeyE', keyCode: 69 },
+  'к': { key: 'к', code: 'KeyR', keyCode: 82 },
+  'е': { key: 'е', code: 'KeyT', keyCode: 84 },
+  'н': { key: 'н', code: 'KeyY', keyCode: 89 },
+  'г': { key: 'г', code: 'KeyU', keyCode: 85 },
+  'ш': { key: 'ш', code: 'KeyI', keyCode: 73 },
+  'щ': { key: 'щ', code: 'KeyO', keyCode: 79 },
+  'з': { key: 'з', code: 'KeyP', keyCode: 80 },
+  'х': { key: 'х', code: 'BracketLeft', keyCode: 219 },
+  'ї': { key: 'ї', code: 'BracketRight', keyCode: 221 }, // украинская ї
+
+  // Третий ряд
+  'ф': { key: 'ф', code: 'KeyA', keyCode: 65 },
+  'і': { key: 'і', code: 'KeyS', keyCode: 83 }, // украинская і
+  'в': { key: 'в', code: 'KeyD', keyCode: 68 },
+  'а': { key: 'а', code: 'KeyF', keyCode: 70 },
+  'п': { key: 'п', code: 'KeyG', keyCode: 71 },
+  'р': { key: 'р', code: 'KeyH', keyCode: 72 },
+  'о': { key: 'о', code: 'KeyJ', keyCode: 74 },
+  'л': { key: 'л', code: 'KeyK', keyCode: 75 },
+  'д': { key: 'д', code: 'KeyL', keyCode: 76 },
+  'ж': { key: 'ж', code: 'Semicolon', keyCode: 186 },
+  'є': { key: 'є', code: 'Quote', keyCode: 222 }, // украинская є
+  '\\': { key: '\\', code: 'Backslash', keyCode: 220 },
+
+  // Четвертый ряд
+  'я': { key: 'я', code: 'KeyZ', keyCode: 90 },
+  'ч': { key: 'ч', code: 'KeyX', keyCode: 88 },
+  'с': { key: 'с', code: 'KeyC', keyCode: 67 },
+  'м': { key: 'м', code: 'KeyV', keyCode: 86 },
+  'и': { key: 'и', code: 'KeyB', keyCode: 66 },
+  'т': { key: 'т', code: 'KeyN', keyCode: 78 },
+  'ь': { key: 'ь', code: 'KeyM', keyCode: 77 },
+  'б': { key: 'б', code: 'Comma', keyCode: 188 },
+  'ю': { key: 'ю', code: 'Period', keyCode: 190 },
+  '.': { key: '.', code: 'Slash', keyCode: 191 },
+
+  // Заглавные буквы (с Shift)
+  'Й': { key: 'Й', code: 'KeyQ', keyCode: 81, shiftKey: true },
+  'Ц': { key: 'Ц', code: 'KeyW', keyCode: 87, shiftKey: true },
+  'У': { key: 'У', code: 'KeyE', keyCode: 69, shiftKey: true },
+  'К': { key: 'К', code: 'KeyR', keyCode: 82, shiftKey: true },
+  'Е': { key: 'Е', code: 'KeyT', keyCode: 84, shiftKey: true },
+  'Н': { key: 'Н', code: 'KeyY', keyCode: 89, shiftKey: true },
+  'Г': { key: 'Г', code: 'KeyU', keyCode: 85, shiftKey: true },
+  'Ш': { key: 'Ш', code: 'KeyI', keyCode: 73, shiftKey: true },
+  'Щ': { key: 'Щ', code: 'KeyO', keyCode: 79, shiftKey: true },
+  'З': { key: 'З', code: 'KeyP', keyCode: 80, shiftKey: true },
+  'Х': { key: 'Х', code: 'BracketLeft', keyCode: 219, shiftKey: true },
+  'Ї': { key: 'Ї', code: 'BracketRight', keyCode: 221, shiftKey: true },
+  'Ф': { key: 'Ф', code: 'KeyA', keyCode: 65, shiftKey: true },
+  'І': { key: 'І', code: 'KeyS', keyCode: 83, shiftKey: true },
+  'В': { key: 'В', code: 'KeyD', keyCode: 68, shiftKey: true },
+  'А': { key: 'А', code: 'KeyF', keyCode: 70, shiftKey: true },
+  'П': { key: 'П', code: 'KeyG', keyCode: 71, shiftKey: true },
+  'Р': { key: 'Р', code: 'KeyH', keyCode: 72, shiftKey: true },
+  'О': { key: 'О', code: 'KeyJ', keyCode: 74, shiftKey: true },
+  'Л': { key: 'Л', code: 'KeyK', keyCode: 75, shiftKey: true },
+  'Д': { key: 'Д', code: 'KeyL', keyCode: 76, shiftKey: true },
+  'Ж': { key: 'Ж', code: 'Semicolon', keyCode: 186, shiftKey: true },
+  'Є': { key: 'Є', code: 'Quote', keyCode: 222, shiftKey: true },
+  'Я': { key: 'Я', code: 'KeyZ', keyCode: 90, shiftKey: true },
+  'Ч': { key: 'Ч', code: 'KeyX', keyCode: 88, shiftKey: true },
+  'С': { key: 'С', code: 'KeyC', keyCode: 67, shiftKey: true },
+  'М': { key: 'М', code: 'KeyV', keyCode: 86, shiftKey: true },
+  'И': { key: 'И', code: 'KeyB', keyCode: 66, shiftKey: true },
+  'Т': { key: 'Т', code: 'KeyN', keyCode: 78, shiftKey: true },
+  'Ь': { key: 'Ь', code: 'KeyM', keyCode: 77, shiftKey: true },
+  'Б': { key: 'Б', code: 'Comma', keyCode: 188, shiftKey: true },
+  'Ю': { key: 'Ю', code: 'Period', keyCode: 190, shiftKey: true },
+
+  // Символы с Shift
+  '!': { key: '!', code: 'Digit1', keyCode: 49, shiftKey: true },
+  '@': { key: '@', code: 'Digit2', keyCode: 50, shiftKey: true },
+  '#': { key: '#', code: 'Digit3', keyCode: 51, shiftKey: true },
+  '$': { key: '$', code: 'Digit4', keyCode: 52, shiftKey: true },
+  '%': { key: '%', code: 'Digit5', keyCode: 53, shiftKey: true },
+  '^': { key: '^', code: 'Digit6', keyCode: 54, shiftKey: true },
+  '&': { key: '&', code: 'Digit7', keyCode: 55, shiftKey: true },
+  '*': { key: '*', code: 'Digit8', keyCode: 56, shiftKey: true },
+  '(': { key: '(', code: 'Digit9', keyCode: 57, shiftKey: true },
+  ')': { key: ')', code: 'Digit0', keyCode: 48, shiftKey: true },
+  '_': { key: '_', code: 'Minus', keyCode: 189, shiftKey: true },
+  '+': { key: '+', code: 'Equal', keyCode: 187, shiftKey: true },
+
+  // Пробел
+  ' ': { key: ' ', code: 'Space', keyCode: 32 },
+};
