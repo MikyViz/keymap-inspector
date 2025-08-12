@@ -55,6 +55,7 @@ keymap-inspector a
 
 ### 📚 Library Usage
 
+**Node.js:**
 ```javascript
 import { KeymapInspector, en, ru, de, fr, es, ua, he } from 'keymap-inspector';
 
@@ -63,6 +64,27 @@ const inspector = new KeymapInspector({ en, ru, de, fr, es, ua, he });
 // Inspect a character
 const result = inspector.inspect('a');
 console.log(result);
+```
+
+**Browser (ES Modules):**
+```html
+<script type="module">
+import { KeymapInspector, en, ru } from 'https://unpkg.com/keymap-inspector@latest/dist/keymap-inspector.browser.js';
+
+const inspector = new KeymapInspector({ en, ru });
+const result = inspector.inspect('a');
+console.log(result);
+</script>
+```
+
+**Browser (Script Tag):**
+```html
+<script src="https://unpkg.com/keymap-inspector@latest/dist/keymap-inspector.browser.js"></script>
+<script>
+const inspector = new KeymapInspector.KeymapInspector({
+    en: KeymapInspector.en,
+    ru: KeymapInspector.ru
+});
 
 // Find by key code
 const byCode = inspector.inspectByCode('KeyA');
@@ -71,6 +93,7 @@ console.log(byCode);
 // Find by keyCode number
 const byKeyCode = inspector.inspectByKeyCode(65);
 console.log(byKeyCode);
+</script>
 ```
 
 ---

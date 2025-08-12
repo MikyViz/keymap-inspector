@@ -1,17 +1,10 @@
-export interface KeyDefinition {
-    key?: string;
-    code: string;
-    keyCode: number;
-    shiftKey?: boolean;
-    location?: number;
-}
-export interface Keymap {
-    [key: string]: KeyDefinition;
-}
-export interface InspectionResult {
-    char: string;
-    keyDefinition: KeyDefinition;
-    layouts: {
-        [layoutName: string]: string | null;
-    };
-}
+export { KeymapInspector } from './KeymapInspector';
+export * from './types';
+export { en } from './layouts/en';
+export { ru } from './layouts/ru';
+export { de } from './layouts/de';
+export { fr } from './layouts/fr';
+export { es } from './layouts/es';
+export { ua } from './layouts/ua';
+export { he } from './layouts/he';
+export * from './layouts';
