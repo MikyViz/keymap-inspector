@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Keymap Inspector</title>
+</head>
+<body>
+    <h1>Debug Keymap Inspector</h1>
+    <div id="debug"></div>
+
+    <!-- Load Keymap Inspector -->
+    <script src="dist/keymap-inspector.browser.js"></script>
+    
+    <script>
+        console.log('KeymapInspector loaded:', typeof KeymapInspector);
+        console.log('KeymapInspector object:', KeymapInspector);
+        console.log('Available layouts:', KeymapInspector.en ? 'EN available' : 'EN missing', KeymapInspector.ru ? 'RU available' : 'RU missing');
+        
+        // Test layout data
+        console.log('EN layout sample:', KeymapInspector.en ? Object.keys(KeymapInspector.en).slice(0, 5) : 'No EN layout');
+        console.log('RU layout sample:', KeymapInspector.ru ? Object.keys(KeymapInspector.ru).slice(0, 5) : 'No RU layout');
+        
+        // Initialize inspector
+        try {
+            const inspector = new KeymapInspector.KeymapInspector({
+                en: KeymapInspector.en,
+                ru: KeymapInspector.ru
+            });
+            
+            console.log('Inspector created:', inspector);
+            console.log('Inspector layouts:', inspector.layouts);
+            console.log('Inspector reversedLayouts:', inspector.reversedLayouts);
+            
+            // Test inspection
+            const testChars = ['a', 'd', 's', 'f', 'й', 'ц'];
+            testChars.forEach(char => {
+                const result = inspector.inspect(char);
+                console.log(`Testing '${char}':`, result);
+            });
+            
+        } catch (error) {
+            console.error('Error creating inspector:', error);
+        }
+        
+        // Display debug info
+        document.getElementById('debug').innerHTML = `
+            <h3>Debug Information:</h3>
+            <p>KeymapInspector: ${typeof KeymapInspector}</p>
+            <p>EN layout available: ${KeymapInspector.en ? 'Yes' : 'No'}</p>
+            <p>RU layout available: ${KeymapInspector.ru ? 'Yes' : 'No'}</p>
+            <p>Check console for detailed debugging info.</p>
+        `;
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keymap Inspector - Browser Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .input-area {
+            margin: 20px 0;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .result {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #007acc;
+        }
+        .layouts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .layout-item {
+            background: #e3f2fd;
+            padding: 8px;
+            border-radius: 3px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .title {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🔍 Keymap Inspector</h1>
+        <p class="subtitle">Type any character to see which key it corresponds to and what characters are on that key in other layouts</p>
+        
+        <div class="input-area">
+            <label for="charInput">Enter a character:</label>
+            <input type="text" id="charInput" maxlength="1" placeholder="Type here..." autocomplete="off">
+        </div>
+        
+        <div id="result"></div>
+        
+        <div class="input-area">
+            <label for="keyInput">Or listen to keyboard events:</label>
+            <input type="text" id="keyInput" placeholder="Press keys here..." autocomplete="off">
+        </div>
+        
+        <div id="keyResult"></div>
+    </div>
+
+    <!-- Load Keymap Inspector -->
+    <script src="dist/keymap-inspector.umd.js"></script>
+    
+    <script>
+        // Initialize inspector with available layouts
+        const inspector = new KeymapInspector.KeymapInspector({
+            en: KeymapInspector.en,
+            ru: KeymapInspector.ru,
+            de: KeymapInspector.de,
+            fr: KeymapInspector.fr,
+            es: KeymapInspector.es,
+            ua: KeymapInspector.ua,
+            he: KeymapInspector.he
+        });
+
+        // Character input handler
+        document.getElementById('charInput').addEventListener('input', function(e) {
+            const char = e.target.value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!char) {
+                resultDiv.innerHTML = '';
+                return;
+            }
+            
+            const result = inspector.inspect(char);
+            
+            if (result) {
+                let html = `
+                    <div class="result">
+                        <h3>Character: "${result.char}"</h3>
+                        <p><strong>Physical Key:</strong> ${result.keyDefinition.code} (keyCode: ${result.keyDefinition.keyCode})</p>
+                        <p><strong>Characters on this key in different layouts:</strong></p>
+                        <div class="layouts">
+                `;
+                
+                for (const layout in result.layouts) {
+                    const char = result.layouts[layout] || '∅';
+                    html += `<div class="layout-item">${layout.toUpperCase()}: ${char}</div>`;
+                }
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+                
+                resultDiv.innerHTML = html;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="result">
+                        <p style="color: #ff6b6b;">Character "${char}" not found in any layout</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Keyboard event handler
+        document.getElementById('keyInput').addEventListener('keydown', function(e) {
+            e.preventDefault();
+            
+            const keyResult = document.getElementById('keyResult');
+            const result = inspector.inspectByCode(e.code);
+            
+            let html = `
+                <div class="result">
+                    <h3>Key Event: ${e.code}</h3>
+                    <p><strong>Raw Event:</strong> key="${e.key}", code="${e.code}", keyCode=${e.keyCode}</p>
+            `;
+            
+            if (result) {
+                html += `
+                    <p><strong>Characters on this key:</strong></p>
+                    <div class="layouts">
+                `;
+                
+                for (const layout in result.layouts) {
+                    const char = result.layouts[layout] || '∅';
+                    html += `<div class="layout-item">${layout.toUpperCase()}: ${char}</div>`;
+                }
+                
+                html += `</div>`;
+            } else {
+                html += `<p style="color: #ff6b6b;">No mapping found for this key</p>`;
+            }
+            
+            html += `</div>`;
+            keyResult.innerHTML = html;
+        });
+
+        // Example on page load
+        setTimeout(() => {
+            document.getElementById('charInput').value = 'a';
+            document.getElementById('charInput').dispatchEvent(new Event('input'));
+        }, 500);
+    </script>
+</body>
+</html>
