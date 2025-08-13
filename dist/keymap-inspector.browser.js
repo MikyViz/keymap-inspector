@@ -421,6 +421,14 @@
     // Global access for script tag usage
     if (typeof window !== 'undefined') {
         window.KeymapInspector = KeymapInspector;
+        // Добавляем раскладки прямо к KeymapInspector для браузера
+        KeymapInspector.en = en;
+        KeymapInspector.ru = ru;
+        KeymapInspector.de = de;
+        KeymapInspector.fr = fr;
+        KeymapInspector.es = es;
+        KeymapInspector.ua = ua;
+        KeymapInspector.he = he;
         window.KeymapLayouts = { en, ru, de, fr, es, ua, he };
     }
 

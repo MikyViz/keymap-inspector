@@ -1,0 +1,11 @@
+{
+  "name": "keymap-inspector-tests",
+  "private": true,
+  "description": "Test files for keymap-inspector development. Not published to npm.",
+  "version": "0.0.0",
+  "scripts": {
+    "test:local": "echo 'Open local-test.html in browser'",
+    "test:npm": "echo 'Open npm-test.html in browser'",
+    "test:all": "echo 'Open test-full.html in browser'"
+  }
+}

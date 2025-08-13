@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест локальных исправлений</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 20px; border-radius: 8px; margin: 10px 0; }
+        .success { color: #28a745; background: #d4edda; padding: 10px; border-radius: 4px; margin: 5px 0; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 4px; margin: 5px 0; }
+        .info { color: #0c5460; background: #d1ecf1; padding: 10px; border-radius: 4px; margin: 5px 0; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; }
+        input { padding: 8px; font-size: 14px; border: 2px solid #ddd; border-radius: 4px; width: 200px; }
+        .result { background: #e8f5e8; padding: 10px; margin: 10px 0; border-radius: 4px; border-left: 4px solid #28a745; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Тест локальных исправлений keymap-inspector</h1>
+    
+    <div class="container">
+        <h2>1. Тест browser.js (локальный)</h2>
+        <div id="browserTest"></div>
+    </div>
+    
+    <div class="container">
+        <h2>2. Тест UMD.js (локальный)</h2>
+        <div id="umdTest"></div>
+    </div>
+    
+    <div class="container">
+        <h2>3. Интерактивный тест</h2>
+        <input type="text" id="testInput" placeholder="Введите символ для теста..." maxlength="1">
+        <div id="interactiveResult"></div>
+    </div>
+
+    <!-- Тестируем локальную browser.js версию -->
+    <script src="../dist/keymap-inspector.browser.js"></script>
+    
+    <script>
+        window.LocalBrowserKeymap = window.KeymapInspector || KeymapInspector;
+        
+        function testLocalBrowser() {
+            const div = document.getElementById('browserTest');
+            let html = '';
+            
+            html += `<div class="info"><strong>Источник:</strong> Локальный ../dist/keymap-inspector.browser.js</div>`;
+            html += `<div class="info"><strong>Тип:</strong> ${typeof LocalBrowserKeymap}</div>`;
+            
+            if (typeof LocalBrowserKeymap === 'function') {
+                html += `<div class="info"><strong>Свойства:</strong> ${Object.getOwnPropertyNames(LocalBrowserKeymap).join(', ')}</div>`;
+                
+                // Проверяем раскладки
+                const layouts = ['en', 'ru', 'de', 'fr', 'es', 'ua', 'he'];
+                let allLayoutsWork = true;
+                
+                layouts.forEach(layout => {
+                    const exists = LocalBrowserKeymap[layout] !== undefined;
+                    const count = exists ? Object.keys(LocalBrowserKeymap[layout] || {}).length : 0;
+                    
+                    if (!exists) allLayoutsWork = false;
+                    
+                    html += `<div class="${exists ? 'success' : 'error'}">
+                        ${exists ? '✅' : '❌'} ${layout.toUpperCase()}: ${exists ? `${count} символов` : 'undefined'}
+                    </div>`;
+                });
+                
+                if (allLayoutsWork) {
+                    html += `<div class="success">🎉 Все раскладки загружены успешно!</div>`;
+                    
+                    // Тестируем создание inspector
+                    try {
+                        const inspector = new LocalBrowserKeymap({
+                            en: LocalBrowserKeymap.en,
+                            ru: LocalBrowserKeymap.ru,
+                            de: LocalBrowserKeymap.de,
+                            fr: LocalBrowserKeymap.fr,
+                            es: LocalBrowserKeymap.es,
+                            ua: LocalBrowserKeymap.ua,
+                            he: LocalBrowserKeymap.he
+                        });
+                        
+                        // Тестируем разные символы
+                        const testChars = ['a', 'й', 'ä', 'é', 'ñ'];
+                        let allTestsPass = true;
+                        
+                        testChars.forEach(char => {
+                            const result = inspector.inspect(char);
+                            if (result) {
+                                html += `<div class="success">✅ '${char}' → Key: ${result.keyDefinition.code}</div>`;
+                            } else {
+                                html += `<div class="error">❌ '${char}' → не найден</div>`;
+                                allTestsPass = false;
+                            }
+                        });
+                        
+                        if (allTestsPass) {
+                            html += `<div class="success">🚀 Browser.js версия работает идеально!</div>`;
+                            window.workingLocalInspector = inspector;
+                        }
+                        
+                    } catch (error) {
+                        html += `<div class="error">❌ Ошибка создания inspector: ${error.message}</div>`;
+                    }
+                } else {
+                    html += `<div class="error">❌ Не все раскладки загружены</div>`;
+                }
+            }
+            
+            div.innerHTML = html;
+        }
+        
+        testLocalBrowser();
+    </script>
+    
+    <!-- Очищаем и тестируем UMD -->
+    <script>
+        window.KeymapInspector = undefined;
+        delete window.KeymapInspector;
+    </script>
+    <script src="../dist/keymap-inspector.umd.js"></script>
+    
+    <script>
+        function testLocalUMD() {
+            const div = document.getElementById('umdTest');
+            let html = '';
+            
+            html += `<div class="info"><strong>Источник:</strong> Локальный ../dist/keymap-inspector.umd.js</div>`;
+            html += `<div class="info"><strong>Тип:</strong> ${typeof KeymapInspector}</div>`;
+            
+            if (typeof KeymapInspector === 'object') {
+                html += `<div class="info"><strong>Свойства:</strong> ${Object.keys(KeymapInspector).join(', ')}</div>`;
+                
+                // Проверяем раскладки и конструктор
+                const items = ['KeymapInspector', 'en', 'ru', 'de', 'fr', 'es', 'ua', 'he'];
+                let hasConstructor = false;
+                let allLayoutsExist = true;
+                
+                items.forEach(item => {
+                    const exists = KeymapInspector[item] !== undefined;
+                    
+                    if (item === 'KeymapInspector') {
+                        hasConstructor = exists;
+                        html += `<div class="${exists ? 'success' : 'error'}">
+                            ${exists ? '✅' : '❌'} ${item}: ${exists ? 'constructor function' : 'undefined'}
+                        </div>`;
+                    } else {
+                        if (!exists) allLayoutsExist = false;
+                        const count = exists ? Object.keys(KeymapInspector[item] || {}).length : 0;
+                        html += `<div class="${exists ? 'success' : 'error'}">
+                            ${exists ? '✅' : '❌'} ${item.toUpperCase()}: ${exists ? `${count} символов` : 'undefined'}
+                        </div>`;
+                    }
+                });
+                
+                if (hasConstructor && allLayoutsExist) {
+                    html += `<div class="success">🎉 UMD версия имеет все необходимые компоненты!</div>`;
+                    
+                    // Тестируем создание inspector
+                    try {
+                        const inspector = new KeymapInspector.KeymapInspector({
+                            en: KeymapInspector.en,
+                            ru: KeymapInspector.ru,
+                            de: KeymapInspector.de
+                        });
+                        
+                        const testResult = inspector.inspect('a');
+                        if (testResult) {
+                            html += `<div class="success">🚀 UMD Inspector работает! Тест 'a': ${testResult.keyDefinition.code}</div>`;
+                        } else {
+                            html += `<div class="error">❌ UMD Inspector создался, но inspect вернул null</div>`;
+                        }
+                        
+                    } catch (error) {
+                        html += `<div class="error">❌ Ошибка создания UMD inspector: ${error.message}</div>`;
+                    }
+                } else {
+                    html += `<div class="error">❌ UMD версии не хватает компонентов</div>`;
+                }
+            }
+            
+            div.innerHTML = html;
+        }
+        
+        setTimeout(testLocalUMD, 200);
+        
+        // Интерактивный тест
+        document.getElementById('testInput').addEventListener('input', function(e) {
+            const char = e.target.value;
+            const resultDiv = document.getElementById('interactiveResult');
+            
+            if (!char) {
+                resultDiv.innerHTML = '';
+                return;
+            }
+            
+            if (window.workingLocalInspector) {
+                const result = window.workingLocalInspector.inspect(char);
+                if (result) {
+                    let html = `
+                        <div class="result">
+                            <strong>Символ:</strong> "${result.char}" | 
+                            <strong>Клавиша:</strong> ${result.keyDefinition.code}<br>
+                            <strong>Во всех раскладках:</strong><br>
+                    `;
+                    
+                    for (const [layout, layoutChar] of Object.entries(result.layouts)) {
+                        html += `${layout.toUpperCase()}: ${layoutChar || '∅'} | `;
+                    }
+                    
+                    html += '</div>';
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">Символ "${char}" не найден</div>`;
+                }
+            } else {
+                resultDiv.innerHTML = `<div class="error">Inspector не готов</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
+

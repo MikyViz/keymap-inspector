@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест NPM версии</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 20px; border-radius: 8px; margin: 10px 0; }
+        .success { color: #28a745; background: #d4edda; padding: 10px; border-radius: 4px; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 4px; }
+        .info { color: #0c5460; background: #d1ecf1; padding: 10px; border-radius: 4px; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        .test-result { margin: 10px 0; padding: 10px; border-left: 4px solid #007bff; background: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Тест keymap-inspector из NPM</h1>
+    
+    <div class="container">
+        <h2>1. Загрузка из unpkg (browser.js)</h2>
+        <div id="browserTest"></div>
+    </div>
+    
+    <div class="container">
+        <h2>2. Загрузка из unpkg (umd.js)</h2>
+        <div id="umdTest"></div>
+    </div>
+    
+    <div class="container">
+        <h2>3. Сравнение версий</h2>
+        <div id="comparisonTest"></div>
+    </div>
+
+    <!-- Тест 1: browser.js версия из npm -->
+    <script src="https://unpkg.com/keymap-inspector@latest/dist/keymap-inspector.browser.js"></script>
+    
+    <script>
+        // Сохраняем browser.js версию
+        window.BrowserKeymap = window.KeymapInspector || KeymapInspector;
+        
+        function testBrowserJS() {
+            const div = document.getElementById('browserTest');
+            let html = '';
+            
+            html += `<div class="info"><strong>Версия:</strong> keymap-inspector@latest/browser.js</div>`;
+            html += `<div class="test-result"><strong>Тип:</strong> ${typeof BrowserKeymap}</div>`;
+            
+            if (typeof BrowserKeymap === 'function') {
+                html += `<div class="test-result"><strong>Свойства:</strong> ${Object.getOwnPropertyNames(BrowserKeymap).join(', ')}</div>`;
+                
+                // Проверяем раскладки
+                const layouts = ['en', 'ru', 'de', 'fr', 'es', 'ua', 'he'];
+                layouts.forEach(layout => {
+                    const exists = BrowserKeymap[layout] !== undefined;
+                    const count = exists ? Object.keys(BrowserKeymap[layout] || {}).length : 0;
+                    html += `<div class="${exists ? 'success' : 'error'}">
+                        ${exists ? '✅' : '❌'} ${layout.toUpperCase()}: ${exists ? `${count} символов` : 'undefined'}
+                    </div>`;
+                });
+                
+                // Попытка создать inspector
+                try {
+                    const inspector = new BrowserKeymap({
+                        en: BrowserKeymap.en,
+                        ru: BrowserKeymap.ru
+                    });
+                    
+                    const testResult = inspector.inspect('a');
+                    if (testResult) {
+                        html += `<div class="success">✅ Inspector работает! Тест 'a': ${testResult.keyDefinition.code}</div>`;
+                        window.workingInspector = inspector;
+                    } else {
+                        html += `<div class="error">❌ Inspector создался, но inspect('a') вернул null</div>`;
+                    }
+                } catch (error) {
+                    html += `<div class="error">❌ Ошибка создания inspector: ${error.message}</div>`;
+                }
+            }
+            
+            div.innerHTML = html;
+        }
+        
+        testBrowserJS();
+        
+        // Логи для отладки (как в вашем файле)
+        console.log('🔍 KeymapInspector object:', BrowserKeymap);
+        console.log('🔍 KeymapInspector properties:', Object.keys(BrowserKeymap));
+        console.log('🔍 KeymapInspector type:', typeof BrowserKeymap);
+        console.log('🔍 KeymapInspector.en:', BrowserKeymap.en);
+        console.log('🔍 KeymapInspector.ru:', BrowserKeymap.ru);
+    </script>
+    
+    <!-- Тест 2: UMD версия -->
+    <script>
+        // Очищаем глобальное пространство
+        window.KeymapInspector = undefined;
+        delete window.KeymapInspector;
+    </script>
+    <script src="https://unpkg.com/keymap-inspector@latest/dist/keymap-inspector.umd.js"></script>
+    
+    <script>
+        function testUMD() {
+            const div = document.getElementById('umdTest');
+            let html = '';
+            
+            html += `<div class="info"><strong>Версия:</strong> keymap-inspector@latest/umd.js</div>`;
+            html += `<div class="test-result"><strong>Тип:</strong> ${typeof KeymapInspector}</div>`;
+            
+            if (typeof KeymapInspector === 'object') {
+                html += `<div class="test-result"><strong>Свойства:</strong> ${Object.keys(KeymapInspector).join(', ')}</div>`;
+                
+                // Проверяем раскладки
+                const layouts = ['en', 'ru', 'de', 'fr', 'es', 'ua', 'he', 'KeymapInspector'];
+                layouts.forEach(layout => {
+                    const exists = KeymapInspector[layout] !== undefined;
+                    let count = 0;
+                    if (exists && layout !== 'KeymapInspector') {
+                        count = Object.keys(KeymapInspector[layout] || {}).length;
+                    }
+                    html += `<div class="${exists ? 'success' : 'error'}">
+                        ${exists ? '✅' : '❌'} ${layout}: ${exists ? 
+                            (layout === 'KeymapInspector' ? 'constructor' : `${count} символов`) : 'undefined'}
+                    </div>`;
+                });
+                
+                // Попытка создать inspector
+                try {
+                    let inspector;
+                    if (KeymapInspector.KeymapInspector) {
+                        inspector = new KeymapInspector.KeymapInspector({
+                            en: KeymapInspector.en,
+                            ru: KeymapInspector.ru
+                        });
+                    }
+                    
+                    if (inspector) {
+                        const testResult = inspector.inspect('a');
+                        if (testResult) {
+                            html += `<div class="success">✅ UMD Inspector работает! Тест 'a': ${testResult.keyDefinition.code}</div>`;
+                        } else {
+                            html += `<div class="error">❌ UMD Inspector создался, но inspect('a') вернул null</div>`;
+                        }
+                    } else {
+                        html += `<div class="error">❌ Не удалось создать UMD inspector</div>`;
+                    }
+                } catch (error) {
+                    html += `<div class="error">❌ Ошибка создания UMD inspector: ${error.message}</div>`;
+                }
+            }
+            
+            div.innerHTML = html;
+        }
+        
+        // Даём время UMD загрузиться
+        setTimeout(testUMD, 100);
+    </script>
+    
+    <script>
+        function compareVersions() {
+            const div = document.getElementById('comparisonTest');
+            let html = '<h3>Результаты сравнения:</h3>';
+            
+            if (window.workingInspector) {
+                html += '<div class="success">✅ Рабочий inspector найден в browser.js версии</div>';
+                html += '<div class="info">💡 Рекомендация: используйте browser.js для вашего проекта</div>';
+                
+                // Предоставляем рабочий код
+                html += `<h4>Рабочий код для вашего проекта:</h4>`;
+                html += `<pre>
+&lt;script src="https://unpkg.com/keymap-inspector@latest/dist/keymap-inspector.browser.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    // Проверяем что раскладки доступны
+    if (KeymapInspector.en && KeymapInspector.ru) {
+        const inspector = new KeymapInspector({
+            en: KeymapInspector.en,
+            ru: KeymapInspector.ru,
+            de: KeymapInspector.de,
+            fr: KeymapInspector.fr,
+            es: KeymapInspector.es,
+            ua: KeymapInspector.ua,
+            he: KeymapInspector.he
+        });
+        
+        window.globalInspector = inspector;
+        console.log('✅ Инспектор готов!');
+    } else {
+        console.error('❌ Раскладки не загрузились');
+    }
+&lt;/script&gt;
+</pre>`;
+            } else {
+                html += '<div class="error">❌ Ни одна версия не работает правильно</div>';
+                html += '<div class="info">💡 Нужно исправить npm пакет</div>';
+            }
+            
+            div.innerHTML = html;
+        }
+        
+        setTimeout(compareVersions, 500);
+    </script>
+</body>
+</html>
+

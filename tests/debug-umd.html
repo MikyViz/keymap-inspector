@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug UMD exports</title>
+</head>
+<body>
+    <h1>Debug UMD Exports</h1>
+    <div id="debug"></div>
+
+    <script src="../dist/keymap-inspector.umd.js"></script>
+    <script>
+        const debugDiv = document.getElementById('debug');
+        debugDiv.innerHTML = `
+            <h2>window.KeymapInspector:</h2>
+            <pre>${JSON.stringify(Object.keys(window.KeymapInspector || {}), null, 2)}</pre>
+            
+            <h2>Каждое свойство:</h2>
+            ${Object.keys(window.KeymapInspector || {}).map(key => 
+                `<div><strong>${key}:</strong> ${typeof window.KeymapInspector[key]}</div>`
+            ).join('')}
+            
+            <h2>window.KeymapInspector.en:</h2>
+            <pre>${JSON.stringify(window.KeymapInspector?.en, null, 2)}</pre>
+        `;
+    </script>
+</body>
+</html>
+

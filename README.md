@@ -429,7 +429,17 @@ class KeymapInspector {
 
 MIT © [mikyviz](https://github.com/MikyViz)
 
-## 🤝 Contributing
+## � Tests & Examples
+
+For testing and development, check out the [tests/](./tests/) directory which contains:
+- Interactive examples and demos
+- Browser compatibility tests
+- Development testing tools
+- Sample implementations
+
+See [tests/README.md](./tests/README.md) for detailed descriptions.
+
+## �🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 

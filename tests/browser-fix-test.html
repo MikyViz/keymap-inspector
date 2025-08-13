@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Keymap Inspector Browser Fix</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 50px; 
+            background: #f5f5f5; 
+        }
+        .test-section { 
+            background: white; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .success { color: #28a745; font-weight: bold; }
+        .error { color: #dc3545; font-weight: bold; }
+        .info { color: #17a2b8; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        input { padding: 10px; font-size: 16px; border: 2px solid #ddd; border-radius: 4px; }
+        .result { background: #e8f5e8; padding: 10px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Тест исправлений Browser JS</h1>
+    
+    <div class="test-section">
+        <h2>1. Тест загрузки из dist/keymap-inspector.browser.js</h2>
+        <div id="browserTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Тест загрузки из dist/keymap-inspector.umd.js</h2>
+        <div id="umdTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Интерактивный тест</h2>
+        <input type="text" id="testChar" placeholder="Введите символ..." maxlength="1">
+        <div id="testResult"></div>
+    </div>
+
+    <!-- Сначала тестируем browser.js -->
+    <script src="../dist/keymap-inspector.browser.js"></script>
+    
+    <script>
+        // Тест browser.js
+        function testBrowserJS() {
+            const testDiv = document.getElementById('browserTest');
+            let html = '';
+            
+            html += `<h3>KeymapInspector загружен:</h3>`;
+            html += `<pre>Тип: ${typeof KeymapInspector}</pre>`;
+            html += `<pre>Свойства: ${Object.getOwnPropertyNames(KeymapInspector)}</pre>`;
+            
+            // Проверяем раскладки
+            const layouts = ['en', 'ru', 'de', 'fr', 'es', 'ua', 'he'];
+            layouts.forEach(layout => {
+                const available = KeymapInspector[layout] ? '✅' : '❌';
+                const count = KeymapInspector[layout] ? Object.keys(KeymapInspector[layout]).length : 0;
+                html += `<div class="${KeymapInspector[layout] ? 'success' : 'error'}">
+                    ${available} ${layout.toUpperCase()}: ${count} символов
+                </div>`;
+            });
+            
+            // Пробуем создать inspector
+            try {
+                const inspector = new KeymapInspector({
+                    en: KeymapInspector.en,
+                    ru: KeymapInspector.ru,
+                    de: KeymapInspector.de,
+                    fr: KeymapInspector.fr,
+                    es: KeymapInspector.es,
+                    ua: KeymapInspector.ua,
+                    he: KeymapInspector.he
+                });
+                
+                html += `<div class="success">✅ Inspector создан успешно!</div>`;
+                window.browserInspector = inspector;
+                
+                // Тестируем символы
+                const testChars = ['a', 'й', 'ä', 'é'];
+                testChars.forEach(char => {
+                    const result = inspector.inspect(char);
+                    if (result) {
+                        html += `<div class="info">✅ '${char}' → ${result.keyDefinition.code}</div>`;
+                    } else {
+                        html += `<div class="error">❌ '${char}' не найден</div>`;
+                    }
+                });
+                
+            } catch (error) {
+                html += `<div class="error">❌ Ошибка создания inspector: ${error.message}</div>`;
+            }
+            
+            testDiv.innerHTML = html;
+        }
+        
+        // Интерактивный тест
+        document.getElementById('testChar').addEventListener('input', function(e) {
+            const char = e.target.value;
+            const resultDiv = document.getElementById('testResult');
+            
+            if (!char || !window.browserInspector) {
+                resultDiv.innerHTML = '';
+                return;
+            }
+            
+            const result = window.browserInspector.inspect(char);
+            if (result) {
+                resultDiv.innerHTML = `
+                    <div class="result">
+                        <strong>Символ:</strong> "${result.char}"<br>
+                        <strong>Клавиша:</strong> ${result.keyDefinition.code}<br>
+                        <strong>Раскладки:</strong> ${Object.entries(result.layouts)
+                            .map(([layout, char]) => `${layout.toUpperCase()}=${char || '∅'}`)
+                            .join(', ')}
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `<div class="error">Символ "${char}" не найден</div>`;
+            }
+        });
+        
+        // Запускаем тесты
+        testBrowserJS();
+    </script>
+</body>
+</html>
+
