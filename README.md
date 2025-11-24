@@ -429,7 +429,11 @@ class KeymapInspector {
 
 MIT © [mikyviz](https://github.com/MikyViz)
 
-## � Tests & Examples
+## ☕ Support
+
+If you find this project helpful, consider [buying me a coffee](https://buymeacoffee.com/moosebro)!
+
+##  Tests & Examples
 
 For testing and development, check out the [tests/](./tests/) directory which contains:
 - Interactive examples and demos
