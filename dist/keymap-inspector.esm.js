@@ -695,42 +695,42 @@ const he = {
     '0': { key: '0', code: 'Digit0', keyCode: 48 },
     '-': { key: '-', code: 'Minus', keyCode: 189 },
     '=': { key: '=', code: 'Equal', keyCode: 187 },
-    // Второй ряд (иврит - справа налево, но клавиши в том же порядке)
-    '/': { key: '/', code: 'KeyQ', keyCode: 81 }, // ק на Q
-    "'": { key: "'", code: 'KeyW', keyCode: 87 }, // ר на W  
-    'ק': { key: 'ק', code: 'KeyE', keyCode: 69 }, // א на E
-    'ר': { key: 'ר', code: 'KeyR', keyCode: 82 }, // ט на R
-    'א': { key: 'א', code: 'KeyT', keyCode: 84 }, // ו на T
-    'ט': { key: 'ט', code: 'KeyY', keyCode: 89 }, // ן на Y
-    'ו': { key: 'ו', code: 'KeyU', keyCode: 85 }, // ם на U
-    'ן': { key: 'ן', code: 'KeyI', keyCode: 73 }, // פ на I
-    'ם': { key: 'ם', code: 'KeyO', keyCode: 79 }, // ף на O
-    'פ': { key: 'פ', code: 'KeyP', keyCode: 80 }, // פ на P
+    // Второй ряд (QWERTYUIOP)
+    '/': { key: '/', code: 'KeyQ', keyCode: 81 }, // / на Q
+    "'": { key: "'", code: 'KeyW', keyCode: 87 }, // ' на W  
+    'ק': { key: 'ק', code: 'KeyE', keyCode: 69 }, // ק (Qof) на E
+    'ר': { key: 'ר', code: 'KeyR', keyCode: 82 }, // ר (Resh) на R
+    'א': { key: 'א', code: 'KeyT', keyCode: 84 }, // א (Alef) на T
+    'ט': { key: 'ט', code: 'KeyY', keyCode: 89 }, // ט (Tet) на Y
+    'ו': { key: 'ו', code: 'KeyU', keyCode: 85 }, // ו (Vav) на U
+    'ן': { key: 'ן', code: 'KeyI', keyCode: 73 }, // ן (final Nun) на I
+    'ם': { key: 'ם', code: 'KeyO', keyCode: 79 }, // ם (final Mem) на O
+    'פ': { key: 'פ', code: 'KeyP', keyCode: 80 }, // פ (Pe) на P
     ']': { key: ']', code: 'BracketLeft', keyCode: 219 },
     '[': { key: '[', code: 'BracketRight', keyCode: 221 },
-    // Третий ряд
-    'ש': { key: 'ש', code: 'KeyA', keyCode: 65 }, // ש на A
-    'ד': { key: 'ד', code: 'KeyS', keyCode: 83 }, // ד на S
-    'ג': { key: 'ג', code: 'KeyD', keyCode: 68 }, // ג на D
-    'כ': { key: 'כ', code: 'KeyF', keyCode: 70 }, // כ на F
-    'ע': { key: 'ע', code: 'KeyG', keyCode: 71 }, // ע на G
-    'י': { key: 'י', code: 'KeyH', keyCode: 72 }, // י на H
-    'ח': { key: 'ח', code: 'KeyJ', keyCode: 74 }, // ח на J
-    'ל': { key: 'ל', code: 'KeyK', keyCode: 75 }, // ל на K
-    'ך': { key: 'ך', code: 'KeyL', keyCode: 76 }, // ך на L
-    'ף': { key: 'ף', code: 'Semicolon', keyCode: 186 }, // ף на ;
+    // Третий ряд (ASDFGHJKL)
+    'ש': { key: 'ש', code: 'KeyA', keyCode: 65 }, // ש (Shin) на A
+    'ד': { key: 'ד', code: 'KeyS', keyCode: 83 }, // ד (Dalet) на S
+    'ג': { key: 'ג', code: 'KeyD', keyCode: 68 }, // ג (Gimel) на D
+    'כ': { key: 'כ', code: 'KeyF', keyCode: 70 }, // כ (Kaf) на F
+    'ע': { key: 'ע', code: 'KeyG', keyCode: 71 }, // ע (Ayin) на G
+    'י': { key: 'י', code: 'KeyH', keyCode: 72 }, // י (Yod) на H
+    'ח': { key: 'ח', code: 'KeyJ', keyCode: 74 }, // ח (Het) на J
+    'ל': { key: 'ל', code: 'KeyK', keyCode: 75 }, // ל (Lamed) на K
+    'ך': { key: 'ך', code: 'KeyL', keyCode: 76 }, // ך (final Kaf) на L
+    'ף': { key: 'ף', code: 'Semicolon', keyCode: 186 }, // ף (final Pe) на ;
     ',': { key: ',', code: 'Quote', keyCode: 222 },
     '\\': { key: '\\', code: 'Backslash', keyCode: 220 },
-    // Четвертый ряд
-    'ז': { key: 'ז', code: 'KeyZ', keyCode: 90 }, // ז на Z
-    'ס': { key: 'ס', code: 'KeyX', keyCode: 88 }, // ס на X
-    'ב': { key: 'ב', code: 'KeyC', keyCode: 67 }, // ב на C
-    'ה': { key: 'ה', code: 'KeyV', keyCode: 86 }, // ה на V
-    'נ': { key: 'נ', code: 'KeyB', keyCode: 66 }, // נ на B
-    'מ': { key: 'מ', code: 'KeyN', keyCode: 78 }, // מ на N
-    'צ': { key: 'צ', code: 'KeyM', keyCode: 77 }, // צ на M
-    'ת': { key: 'ת', code: 'Comma', keyCode: 188 }, // ת на ,
-    'ץ': { key: 'ץ', code: 'Period', keyCode: 190 }, // ץ на .
+    // Четвертый ряд (ZXCVBNM)
+    'ז': { key: 'ז', code: 'KeyZ', keyCode: 90 }, // ז (Zayin) на Z
+    'ס': { key: 'ס', code: 'KeyX', keyCode: 88 }, // ס (Samekh) на X
+    'ב': { key: 'ב', code: 'KeyC', keyCode: 67 }, // ב (Bet) на C
+    'ה': { key: 'ה', code: 'KeyV', keyCode: 86 }, // ה (He) на V
+    'נ': { key: 'נ', code: 'KeyB', keyCode: 66 }, // נ (Nun) на B
+    'מ': { key: 'מ', code: 'KeyN', keyCode: 78 }, // מ (Mem) на N
+    'צ': { key: 'צ', code: 'KeyM', keyCode: 77 }, // צ (Tsadi) на M
+    'ת': { key: 'ת', code: 'Comma', keyCode: 188 }, // ת (Tav) на ,
+    'ץ': { key: 'ץ', code: 'Period', keyCode: 190 }, // ץ (final Tsadi) на .
     '.': { key: '.', code: 'Slash', keyCode: 191 },
     // Символы с Shift (английские символы при нажатии Shift)
     '!': { key: '!', code: 'Digit1', keyCode: 49, shiftKey: true },
