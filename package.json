@@ -1,6 +1,6 @@
 {
   "name": "keymap-inspector",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Inspect keyboard events and characters across different layouts. Support: https://buymeacoffee.com/moosebro",
   "main": "dist/index.js",
   "module": "dist/keymap-inspector.esm.js",
