@@ -150,6 +150,9 @@
         "b": { "key": "b", "code": "KeyB", "keyCode": 66 },
         "n": { "key": "n", "code": "KeyN", "keyCode": 78 },
         "m": { "key": "m", "code": "KeyM", "keyCode": 77 },
+        ",": { "key": ",", "code": "Comma", "keyCode": 188 },
+        ".": { "key": ".", "code": "Period", "keyCode": 190 },
+        "/": { "key": "/", "code": "Slash", "keyCode": 191 },
         " ": { "key": " ", "code": "Space", "keyCode": 32 }
     };
 
@@ -190,6 +193,9 @@
         "и": { "key": "и", "code": "KeyB", "keyCode": 66 },
         "т": { "key": "т", "code": "KeyN", "keyCode": 78 },
         "ь": { "key": "ь", "code": "KeyM", "keyCode": 77 },
+        "б": { "key": "б", "code": "Comma", "keyCode": 188 },
+        "ю": { "key": "ю", "code": "Period", "keyCode": 190 },
+        ".": { "key": ".", "code": "Slash", "keyCode": 191 },
         " ": { "key": " ", "code": "Space", "keyCode": 32 }
     };
 
@@ -231,6 +237,9 @@
         "b": { "key": "b", "code": "KeyB", "keyCode": 66 },
         "n": { "key": "n", "code": "KeyN", "keyCode": 78 },
         "m": { "key": "m", "code": "KeyM", "keyCode": 77 },
+        ",": { "key": ",", "code": "Comma", "keyCode": 188 },
+        ".": { "key": ".", "code": "Period", "keyCode": 190 },
+        "-": { "key": "-", "code": "Slash", "keyCode": 191 },
         "ä": { "key": "ä", "code": "Quote", "keyCode": 222 },
         "ö": { "key": "ö", "code": "Semicolon", "keyCode": 186 },
         "ü": { "key": "ü", "code": "BracketLeft", "keyCode": 219 },
@@ -276,6 +285,10 @@
         "v": { "key": "v", "code": "KeyV", "keyCode": 86 },
         "b": { "key": "b", "code": "KeyB", "keyCode": 66 },
         "n": { "key": "n", "code": "KeyN", "keyCode": 78 },
+        ",": { "key": ",", "code": "KeyM", "keyCode": 77 },
+        ";": { "key": ";", "code": "Comma", "keyCode": 188 },
+        ":": { "key": ":", "code": "Period", "keyCode": 190 },
+        "!": { "key": "!", "code": "Slash", "keyCode": 191 },
         "é": { "key": "é", "code": "Digit2", "keyCode": 50, "shiftKey": true },
         "è": { "key": "è", "code": "Digit7", "keyCode": 55, "shiftKey": true },
         "ç": { "key": "ç", "code": "Digit9", "keyCode": 57, "shiftKey": true },
@@ -322,6 +335,9 @@
         "b": { "key": "b", "code": "KeyB", "keyCode": 66 },
         "n": { "key": "n", "code": "KeyN", "keyCode": 78 },
         "m": { "key": "m", "code": "KeyM", "keyCode": 77 },
+        ",": { "key": ",", "code": "Comma", "keyCode": 188 },
+        ".": { "key": ".", "code": "Period", "keyCode": 190 },
+        "-": { "key": "-", "code": "Slash", "keyCode": 191 },
         " ": { "key": " ", "code": "Space", "keyCode": 32 }
     };
 
@@ -363,6 +379,9 @@
         "и": { "key": "и", "code": "KeyB", "keyCode": 66 },
         "т": { "key": "т", "code": "KeyN", "keyCode": 78 },
         "ь": { "key": "ь", "code": "KeyM", "keyCode": 77 },
+        "б": { "key": "б", "code": "Comma", "keyCode": 188 },
+        "ю": { "key": "ю", "code": "Period", "keyCode": 190 },
+        ".": { "key": ".", "code": "Slash", "keyCode": 191 },
         " ": { "key": " ", "code": "Space", "keyCode": 32 }
     };
 
