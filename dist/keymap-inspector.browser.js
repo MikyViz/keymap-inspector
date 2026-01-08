@@ -1,10 +1,10 @@
 // Keymap Inspector - Browser Build v0.1.1
 // Compatible with browsers, UMD format
-(function(global, factory) {
+(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = global || self, factory(global.KeymapInspector = {}));
-}(this, (function(exports) {
+        typeof define === 'function' && define.amd ? define(['exports'], factory) :
+            (global = global || self, factory(global.KeymapInspector = {}));
+}(this, (function (exports) {
     'use strict';
 
     // KeymapInspector class
@@ -19,7 +19,7 @@
                 for (const char in layout) {
                     const keyDef = layout[char];
                     const currentCode = keyDef.code;
-                    
+
                     if (!keyDef.shiftKey) {
                         this.reversedLayouts[layoutName][currentCode] = char;
                     } else {
@@ -134,6 +134,8 @@
         "i": { "key": "i", "code": "KeyI", "keyCode": 73 },
         "o": { "key": "o", "code": "KeyO", "keyCode": 79 },
         "p": { "key": "p", "code": "KeyP", "keyCode": 80 },
+        "[": { "key": "[", "code": "BracketLeft", "keyCode": 219 },
+        "]": { "key": "]", "code": "BracketRight", "keyCode": 221 },
         "a": { "key": "a", "code": "KeyA", "keyCode": 65 },
         "s": { "key": "s", "code": "KeyS", "keyCode": 83 },
         "d": { "key": "d", "code": "KeyD", "keyCode": 68 },
@@ -143,6 +145,8 @@
         "j": { "key": "j", "code": "KeyJ", "keyCode": 74 },
         "k": { "key": "k", "code": "KeyK", "keyCode": 75 },
         "l": { "key": "l", "code": "KeyL", "keyCode": 76 },
+        ";": { "key": ";", "code": "Semicolon", "keyCode": 186 },
+        "'": { "key": "'", "code": "Quote", "keyCode": 222 },
         "z": { "key": "z", "code": "KeyZ", "keyCode": 90 },
         "x": { "key": "x", "code": "KeyX", "keyCode": 88 },
         "c": { "key": "c", "code": "KeyC", "keyCode": 67 },
@@ -177,6 +181,8 @@
         "ш": { "key": "ш", "code": "KeyI", "keyCode": 73 },
         "щ": { "key": "щ", "code": "KeyO", "keyCode": 79 },
         "з": { "key": "з", "code": "KeyP", "keyCode": 80 },
+        "х": { "key": "х", "code": "BracketLeft", "keyCode": 219 },
+        "ъ": { "key": "ъ", "code": "BracketRight", "keyCode": 221 },
         "ф": { "key": "ф", "code": "KeyA", "keyCode": 65 },
         "ы": { "key": "ы", "code": "KeyS", "keyCode": 83 },
         "в": { "key": "в", "code": "KeyD", "keyCode": 68 },
@@ -186,6 +192,8 @@
         "о": { "key": "о", "code": "KeyJ", "keyCode": 74 },
         "л": { "key": "л", "code": "KeyK", "keyCode": 75 },
         "д": { "key": "д", "code": "KeyL", "keyCode": 76 },
+        "ж": { "key": "ж", "code": "Semicolon", "keyCode": 186 },
+        "э": { "key": "э", "code": "Quote", "keyCode": 222 },
         "я": { "key": "я", "code": "KeyZ", "keyCode": 90 },
         "ч": { "key": "ч", "code": "KeyX", "keyCode": 88 },
         "с": { "key": "с", "code": "KeyC", "keyCode": 67 },
@@ -221,6 +229,8 @@
         "i": { "key": "i", "code": "KeyI", "keyCode": 73 },
         "o": { "key": "o", "code": "KeyO", "keyCode": 79 },
         "p": { "key": "p", "code": "KeyP", "keyCode": 80 },
+        "ü": { "key": "ü", "code": "BracketLeft", "keyCode": 219 },
+        "+": { "key": "+", "code": "BracketRight", "keyCode": 221 },
         "a": { "key": "a", "code": "KeyA", "keyCode": 65 },
         "s": { "key": "s", "code": "KeyS", "keyCode": 83 },
         "d": { "key": "d", "code": "KeyD", "keyCode": 68 },
@@ -229,8 +239,8 @@
         "h": { "key": "h", "code": "KeyH", "keyCode": 72 },
         "j": { "key": "j", "code": "KeyJ", "keyCode": 74 },
         "k": { "key": "k", "code": "KeyK", "keyCode": 75 },
-        "l": { "key": "l", "code": "KeyL", "keyCode": 76 },
-        "y": { "key": "y", "code": "KeyZ", "keyCode": 90 },
+        "l": { "key": "l", "code": "KeyL", "keyCode": 76 }, ";": { "key": ";", "code": "Semicolon", "keyCode": 186 },
+        "'": { "key": "'", "code": "Quote", "keyCode": 222 }, "y": { "key": "y", "code": "KeyZ", "keyCode": 90 },
         "x": { "key": "x", "code": "KeyX", "keyCode": 88 },
         "c": { "key": "c", "code": "KeyC", "keyCode": 67 },
         "v": { "key": "v", "code": "KeyV", "keyCode": 86 },
@@ -269,6 +279,8 @@
         "i": { "key": "i", "code": "KeyI", "keyCode": 73 },
         "o": { "key": "o", "code": "KeyO", "keyCode": 79 },
         "p": { "key": "p", "code": "KeyP", "keyCode": 80 },
+        "^": { "key": "^", "code": "BracketLeft", "keyCode": 219 },
+        "$": { "key": "$", "code": "BracketRight", "keyCode": 221 },
         "q": { "key": "q", "code": "KeyA", "keyCode": 65 },
         "s": { "key": "s", "code": "KeyS", "keyCode": 83 },
         "d": { "key": "d", "code": "KeyD", "keyCode": 68 },
@@ -318,6 +330,8 @@
         "i": { "key": "i", "code": "KeyI", "keyCode": 73 },
         "o": { "key": "o", "code": "KeyO", "keyCode": 79 },
         "p": { "key": "p", "code": "KeyP", "keyCode": 80 },
+        "`": { "key": "`", "code": "BracketLeft", "keyCode": 219 },
+        "+": { "key": "+", "code": "BracketRight", "keyCode": 221 },
         "a": { "key": "a", "code": "KeyA", "keyCode": 65 },
         "s": { "key": "s", "code": "KeyS", "keyCode": 83 },
         "d": { "key": "d", "code": "KeyD", "keyCode": 68 },
@@ -363,6 +377,8 @@
         "ш": { "key": "ш", "code": "KeyI", "keyCode": 73 },
         "щ": { "key": "щ", "code": "KeyO", "keyCode": 79 },
         "з": { "key": "з", "code": "KeyP", "keyCode": 80 },
+        "х": { "key": "х", "code": "BracketLeft", "keyCode": 219 },
+        "ї": { "key": "ї", "code": "BracketRight", "keyCode": 221 },
         "ф": { "key": "ф", "code": "KeyA", "keyCode": 65 },
         "і": { "key": "і", "code": "KeyS", "keyCode": 83 },
         "в": { "key": "в", "code": "KeyD", "keyCode": 68 },
@@ -372,6 +388,8 @@
         "о": { "key": "о", "code": "KeyJ", "keyCode": 74 },
         "л": { "key": "л", "code": "KeyK", "keyCode": 75 },
         "д": { "key": "д", "code": "KeyL", "keyCode": 76 },
+        "ж": { "key": "ж", "code": "Semicolon", "keyCode": 186 },
+        "є": { "key": "є", "code": "Quote", "keyCode": 222 },
         "я": { "key": "я", "code": "KeyZ", "keyCode": 90 },
         "ч": { "key": "ч", "code": "KeyX", "keyCode": 88 },
         "с": { "key": "с", "code": "KeyC", "keyCode": 67 },
